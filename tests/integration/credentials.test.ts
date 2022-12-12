@@ -14,13 +14,16 @@ import { string } from "joi";
 beforeAll(async () => {
   await init();
 });
-
+// beforeAll(async () => {
+//   await cleanDb();
+// });
 beforeEach(async () => {
   await cleanDb();
 });
-afterEach(async () => {
-  await cleanDb();
-});
+
+// afterEach(async () => {
+//   await cleanDb();
+// });
 
 const server = supertest(app);
 
@@ -50,6 +53,7 @@ describe("POST /credential", () => {
 
     expect(response.status).toBe(httpStatus.BAD_REQUEST);
   });
+});
   describe("when body and token are valid",() => {
     const generateValidBody = () => ({
         title: faker.name.lastName(),
@@ -73,14 +77,13 @@ it("should respond with status 201 when body is valid and send a token", async (
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
 
     const credentialBody = generateValidBody();
-  
+  console.log("vai chamar o post")
     const response = await server.post("/credential").set("Authorization", `Bearer ${token}`).send(credentialBody);
 
     const isCredentialCreated = await findCredentials(user.id)
     expect(response.status).toBe(httpStatus.CREATED);
     expect(isCredentialCreated[0].username).toBe(credentialBody.username)
   });
-})
 })
 
 describe("GET /credential", () => {

@@ -9,7 +9,8 @@ export async function createCredential(params: Partial<Credential> = {}): Promis
     const Cryptr = require('cryptr');
     const cryptr = new Cryptr(process.env.SECRET_KEY);
     const hashedPassword = cryptr.encrypt(incomingPassword)
-    return await prisma.credential.create({
+   
+   return await prisma.credential.create({
         data: {
             title: params.title || faker.name.firstName() ,
             url: params.url || faker.internet.url(),

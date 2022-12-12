@@ -52,38 +52,38 @@ describe("POST /network", () => {
 
         expect(response.status).toBe(httpStatus.BAD_REQUEST);
     });
-    describe("when body and token are valid", () => {
-        const generateValidBody = () => ({
-            title: faker.name.lastName(),
-            network: faker.animal.dog(),
-            password: faker.random.alphaNumeric(10)
-        });
-        it("should respond with status 409 if user already has a similar title ", async () => {
-            const user = await createUser();
-            const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
-            const networkBody = generateValidBody();
-            const networkRepeated = { ...networkBody, userId: user.id }
-            const network = await createNetwork(networkRepeated)
+});
+describe("when body and token are valid", () => {
+    const generateValidBody = () => ({
+        title: faker.name.lastName(),
+        network: faker.animal.dog(),
+        password: faker.random.alphaNumeric(10)
+    });
+    it("should respond with status 409 if user already has a similar title ", async () => {
+        const user = await createUser();
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+        const networkBody = generateValidBody();
+        const networkRepeated = { ...networkBody, userId: user.id }
+        const network = await createNetwork(networkRepeated)
 
-            const response = await server.post("/network").set("Authorization", `Bearer ${token}`).send(networkBody);
+        const response = await server.post("/network").set("Authorization", `Bearer ${token}`).send(networkBody);
 
-            expect(response.status).toBe(httpStatus.CONFLICT);
-        });
-        it("should respond with status 201 when body is valid and send a token", async () => {
-            const user = await createUser();
-            const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+        expect(response.status).toBe(httpStatus.CONFLICT);
+    });
+    it("should respond with status 201 when body is valid and send a token", async () => {
+        const user = await createUser();
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
 
-            const networkBody = generateValidBody();
+        const networkBody = generateValidBody();
 
-            const response = await server.post("/network").set("Authorization", `Bearer ${token}`).send(networkBody);
+        const response = await server.post("/network").set("Authorization", `Bearer ${token}`).send(networkBody);
 
-            const isNetworkCreated = await findNetwork(user.id)
+        const isNetworkCreated = await findNetwork(user.id)
 
-            console.log(isNetworkCreated)
-            expect(response.status).toBe(httpStatus.CREATED);
-            expect(isNetworkCreated[0].network).toBe(networkBody.network)
-        });
-    })
+        console.log(isNetworkCreated)
+        expect(response.status).toBe(httpStatus.CREATED);
+        expect(isNetworkCreated[0].network).toBe(networkBody.network)
+    });
 })
 
 describe("GET /network", () => {
