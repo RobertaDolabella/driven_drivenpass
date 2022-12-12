@@ -265,7 +265,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src/repositories/creedential-repositpry/index.ts
+SF:src/repositories/creedential-repository/index.ts
 FN:4,findCredentailByUserAndTitle
 FN:17,createCrendentialValid
 FN:33,findCredentailByUser

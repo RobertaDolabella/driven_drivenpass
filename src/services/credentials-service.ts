@@ -1,5 +1,5 @@
 import { conflictError } from "./errors";
-import credentialRepository from "@/repositories/creedential-repositpry";
+import credentialRepository from "@/repositories/creedential-repository";
 import { Credential } from "@prisma/client";
 import cryptr from "cryptr"
 import * as jwt from "jsonwebtoken";
@@ -38,7 +38,6 @@ export async function findCredentialById(userId: number, id:number) {
     if(!idCredentials){
         throw invalidIdError()
     }
-console.log(userId, idCredentials.userId)
     if(userId!==idCredentials.userId){
         console.log("o userId não é igual ao id user")
         console.log(userId, idCredentials.id)
