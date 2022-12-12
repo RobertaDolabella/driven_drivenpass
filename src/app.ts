@@ -7,21 +7,16 @@ import { loadEnv, connectDb, disconnectDB } from "@/config";
 loadEnv();
 
 import { handleApplicationErrors } from "@/middlewares";
-import { usersRouter} from "@/routers";
+import { usersRouter, credentialsRouter, networksRouter} from "@/routers";
 // authenticationRouter, eventsRouter, enrollmentsRouter, ticketsRouter, hotelsRouter, bookingRouter 
 
 const app = express();
 app
   .use(cors())
   .use(express.json())
-  .use("/users", usersRouter)
-//   .use("/auth", authenticationRouter)
-//   .use("/event", eventsRouter)
-//   .use("/enrollments", enrollmentsRouter)
-//   .use("/tickets", ticketsRouter)
-//   .use("/hotels", hotelsRouter)
-//   .use("/booking", bookingRouter)
-//   .use(handleApplicationErrors);
+  .use("/", usersRouter)
+  .use("/credential", credentialsRouter)
+  .use("/network", networksRouter)
 
 export function init(): Promise<Express> {
   connectDb();

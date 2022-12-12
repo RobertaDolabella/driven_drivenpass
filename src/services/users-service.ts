@@ -1,4 +1,3 @@
-import { cannotEnrollBeforeStartDateError } from "@/errors";
 import userRepository from "@/repositories/user-repository";
 import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
@@ -12,10 +11,12 @@ export async function createUser({ email, password }: CreateUserParams): Promise
 
   const hashedPassword = await bcrypt.hash(password, 12);
 
-  return userRepository.create({
+  await userRepository.create({
     email,
     password: hashedPassword,
   });
+  
+  return 
 }
 
 async function validateUniqueEmailOrFail(email: string) {
@@ -25,24 +26,29 @@ async function validateUniqueEmailOrFail(email: string) {
   }
 }
 
-export async function logUserIn(email:string, password:string ){
+export async function logUserIn(email: string, password: string) {
 
-  const user =  await findUserByEmail(email)
+  const user = await findUserByEmail(email)
 
-  validatePasswordOrFail(password, user.password)
+  await validatePasswordOrFail(password, user.password)
 
-  const token = generateToken(user.id)
+  const tokenToBeSent = { token: generateToken(user.id) }
 
-  return token
+  return tokenToBeSent
 }
 
 async function validatePasswordOrFail(password: string, userPassword: string) {
+
   const isPasswordValid = await bcrypt.compare(password, userPassword);
-  if (!isPasswordValid) throw invalidCredentialsError();
+  console.log(isPasswordValid)
+  if (!isPasswordValid) {
+    throw invalidCredentialsError();
+  }
 }
 
 async function findUserByEmail(email: string) {
   const userByEmail = await userRepository.findByEmail(email);
+  console.log(userByEmail)
   if (!userByEmail) {
     throw invalidCredentialsError();
   }
@@ -50,9 +56,9 @@ async function findUserByEmail(email: string) {
 }
 
 
-function generateToken(userId:number) {
+function generateToken(userId: number) {
 
-  const token = jwt.sign({userId}, process.env.JWT_SECRET);
+  const token = jwt.sign({ userId }, process.env.JWT_SECRET);
 
   return token
 }

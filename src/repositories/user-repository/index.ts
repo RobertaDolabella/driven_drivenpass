@@ -1,19 +1,11 @@
 import { prisma } from "@/config";
 import { Prisma } from "@prisma/client";
 
-async function findByEmail(email: string, select?: Prisma.UserSelect) {
+async function findByEmail(email: string) {
 
-  const params: Prisma.UserFindUniqueArgs = {
-    where: {
-      email,
-    },
-  };
+  const user =  await prisma.user.findUnique({where:{email}});
 
-  if (select) {
-    params.select = select;
-  }
-
-  return prisma.user.findUnique(params);
+  return user
 }
 
 async function create(data: Prisma.UserUncheckedCreateInput) {

@@ -2,24 +2,23 @@ import userService from "@/services/users-service";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 
-export async function usersPost(req: Request, res: Response) {
+export async function userCreate(req: Request, res: Response) {
   const { email, password } = req.body;
   try {
-    const user = await userService.createUser({ email, password });
-    return res.status(httpStatus.CREATED);
+    await userService.createUser({ email, password });
+    return res.sendStatus(httpStatus.CREATED);
   } catch (error) {
-    if (error.name === "DuplicatedEmailError") {
-      return res.status(httpStatus.CONFLICT).send(error);
-    }
-    return res.status(httpStatus.BAD_REQUEST).send(error);
+    return res.status(httpStatus.CONFLICT).send(error);
   }
 }
 
-export async function usersGet(req: Request, res: Response) {
+export async function userLogIn(req: Request, res: Response) {
+
   const { email, password } = req.body;
   try {
     const token  = await userService.logUserIn(email, password);
-    return res.status(httpStatus.CREATED);
+
+    return res.status(httpStatus.OK).send(token)
   } catch (error) {
     if (error.name === "InvalidCredentialsError") {
       return res.status(httpStatus.UNAUTHORIZED).send(error);
