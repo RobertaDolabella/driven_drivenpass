@@ -9,16 +9,12 @@ export async function credentialPost(req: AuthenticatedRequest, res: Response) {
   const userId = req.userId
   
   try {
+
     const credential = await credentialService.createCredential( userId, title, username, url, password);
-    return res.status(httpStatus.CREATED);
+
+    return res.sendStatus(httpStatus.CREATED);
   } catch (error) {
-    if (error.name === "DuplicatedEmailError") {
       return res.status(httpStatus.CONFLICT).send(error);
-    }
-    if (error.name === "InvalidCredentialsError") {
-      return res.status(httpStatus.UNAUTHORIZED).send(error);
-    }
-    return res.status(httpStatus.BAD_REQUEST).send(error);
   }
 }
 
@@ -28,8 +24,8 @@ export async function credentialGet(req: AuthenticatedRequest, res: Response) {
   
   try {
 
-    const userCredentials = await credentialService.findCredential( userId);
-    return res.status(httpStatus.CREATED).send(userCredentials)
+    const userCredentials = await credentialService.findCredential(userId);
+    return res.status(httpStatus.OK).send(userCredentials)
   } catch (error) {
     return res.status(httpStatus.BAD_REQUEST).send(error);
   }
@@ -40,19 +36,14 @@ export async function credentialGetById(req: AuthenticatedRequest, res: Response
 
   const userId = req.userId
 
-  const id = Number(req.params)
-  
+  const id = Number(req.params.id)  
+
   try {
     const credentialById = await credentialService.findCredentialById( userId,id);
-    return res.status(httpStatus.CREATED).send(credentialById);
+    return res.status(httpStatus.OK).send(credentialById);
   } catch (error) {
-    if (error.name === "DuplicatedEmailError") {
-      return res.status(httpStatus.CONFLICT).send(error);
-    }
-    if (error.name === "InvalidCredentialsError") {
       return res.status(httpStatus.UNAUTHORIZED).send(error);
     }
-    return res.status(httpStatus.BAD_REQUEST).send(error);
   }
-}
+
 

@@ -4,14 +4,15 @@ import { Credential } from "@prisma/client";
 import cryptr from "cryptr"
 import * as jwt from "jsonwebtoken";
 // import eventsService from "../events-service";
-import { duplicatedEmailError, invalidCredentialsError, invalidIdError } from "./errors";
+import { invalidIdError } from "./errors";
 
 
 export async function createCredential(userId: number, title: string, username: string, url: string, password: string) {
 
     const isTitleNotValid = await credentialRepository.findCredentailByUserAndTitle(userId, title)
 
-    if (isTitleNotValid) {
+    if (isTitleNotValid.length>0) {
+   
         throw conflictError()
     }
 
@@ -26,7 +27,7 @@ export async function findCredential(userId: number) {
 
     const usersCredentials = await credentialRepository.findCredentailByUser(userId)
 
-   const userCredentialsPasswordDecript =  decryptHashPasswords(usersCredentials)
+   const userCredentialsPasswordDecript =  await decryptHashPasswords(usersCredentials)
 
     return userCredentialsPasswordDecript
 }
@@ -37,14 +38,17 @@ export async function findCredentialById(userId: number, id:number) {
     if(!idCredentials){
         throw invalidIdError()
     }
-
-    if(userId!==idCredentials[0].id){
+console.log(userId, idCredentials.userId)
+    if(userId!==idCredentials.userId){
+        console.log("o userId não é igual ao id user")
+        console.log(userId, idCredentials.id)
         throw invalidIdError()
     }
 
-   const idCredentialPasswordDecript =  decryptHashPasswords(idCredentials)
+   const idCredentialPasswordDecript =  decryptHashPassword(idCredentials)
 
     return idCredentialPasswordDecript
+
 }
 
 
@@ -69,6 +73,15 @@ async function decryptHashPasswords(usersCredentials: Credential[]) {
 
 }
 
+async function decryptHashPassword(usersCredential: Credential) {
+
+    const Cryptr = require('cryptr');
+    const cryptr = new Cryptr(process.env.SECRET_KEY);
+    usersCredential.password = cryptr.decrypt(usersCredential.password)
+
+    return usersCredential
+
+}
 export type CreateCredentialParams = Omit<Credential, "id" & "userId">;
 
 const credentialService = {

@@ -4,9 +4,9 @@ import { createUser } from "./factories";
 import { prisma } from "@/config";
 
 export async function cleanDb() {
-  await prisma.user.deleteMany({});
-  await prisma.credential.deleteMany({});
   await prisma.network.deleteMany({});
+  await prisma.credential.deleteMany({});
+  await prisma.user.deleteMany({});
 }
 
 export async function generateValidToken(user?: User) {

@@ -16,7 +16,7 @@ async function findCredentailByUserAndTitle(userId: number, title: string) {
 
 async function createCrendentialValid(userId:number, title: string, username: string, url: string, password: string) {
 
-    return await prisma.credential.create({
+   await prisma.credential.create({
         data:{
             title,
             userId, 
@@ -25,6 +25,8 @@ async function createCrendentialValid(userId:number, title: string, username: st
             password
         }
     });
+
+    return
   
   }
 
@@ -41,7 +43,7 @@ async function createCrendentialValid(userId:number, title: string, username: st
   }
   async function findCredentailById(id: number) {
 
-    const userCredentials =  await prisma.credential.findMany({
+    const userCredentials =  await prisma.credential.findUnique({
         where:{
             id
         }
