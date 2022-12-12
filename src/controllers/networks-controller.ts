@@ -4,13 +4,15 @@ import { AuthenticatedRequest } from "@/middlewares";
 import networkService from "@/services/networks-service";
 
 export async function networkPost(req: AuthenticatedRequest, res: Response) {
+  
   const { title, network, password} = req.body;
 
   const userId = req.userId
+  console.log(userId)
   
   try {
 
-    const credential = await networkService.createNetwork( userId, title, network, password);
+    const networkCreation = await networkService.createNetwork( userId, title, network, password);
 
     return res.sendStatus(httpStatus.CREATED);
   } catch (error) {

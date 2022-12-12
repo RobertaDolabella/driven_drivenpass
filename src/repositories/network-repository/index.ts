@@ -15,7 +15,7 @@ async function findNetworkByUserAndTitle(userId: number, title: string) {
 
 async function createNetworkValid(userId: number, title: string, network:string, password: string) {
 
-    await prisma.network.create({
+    return await prisma.network.create({
         data: {
             title,
             userId,
@@ -24,7 +24,7 @@ async function createNetworkValid(userId: number, title: string, network:string,
         }
     });
 
-    return
+
 
 }
 

@@ -9,7 +9,7 @@ import { invalidIdError } from "./errors";
 export async function createNetwork(userId: number, title: string, network: string, password: string) {
 
     const isTitleNotValid = await networkRepository.findNetworkByUserAndTitle(userId, title)
-
+console.log("verificou o userid")
     if (isTitleNotValid.length>0) {
         throw conflictError()
     }
@@ -17,7 +17,7 @@ export async function createNetwork(userId: number, title: string, network: stri
     const hashedPassword = await criptPassword(password)
 
     await networkRepository.createNetworkValid(userId, title,network,hashedPassword)
-
+console.log("passou do cretaed")
     return
 }
 async function criptPassword(password: string) {

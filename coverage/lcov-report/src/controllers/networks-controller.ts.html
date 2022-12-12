@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/controllers/credentials-controller.ts</title>
+    <title>Code coverage report for src/controllers/networks-controller.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/controllers</a> credentials-controller.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/controllers</a> networks-controller.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.27% </span>
+                <span class="strong">73.91% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/22</span>
+                <span class='fraction'>17/23</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.27% </span>
+                <span class="strong">73.91% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/22</span>
+                <span class='fraction'>17/23</span>
             </div>
         
             
@@ -111,25 +111,26 @@
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -142,8 +143,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -160,57 +159,55 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import credentialService from "../services/credentials-service"
-import { Request, Response } from "express";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { AuthenticatedRequest } from "@/middlewares";
+import networkService from "@/services/networks-service";
 &nbsp;
-export async function credentialPost(req: AuthenticatedRequest, res: Response) {
-  const { title, username, url, password} = req.body;
+export async function networkPost(req: AuthenticatedRequest, res: Response) {
+  
+  const { title, network, password} = req.body;
 &nbsp;
   const userId = req.userId
+  console.log(userId)
   
   try {
 &nbsp;
-    const credential = await credentialService.createCredential( userId, title, username, url, password);
+    const networkCreation = await networkService.createNetwork( userId, title, network, password);
 &nbsp;
-    return res.sendStatus(httpStatus.CREATED);
+<span class="cstat-no" title="statement not covered" >    return res.sendStatus(httpStatus.CREATED);</span>
   } catch (error) {
       return res.status(httpStatus.CONFLICT).send(error);
   }
 }
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >credentialGet(</span>req: AuthenticatedRequest, res: Response) {
+export async function <span class="fstat-no" title="function not covered" >networkGet(</span>req: AuthenticatedRequest, res: Response) {
 &nbsp;
-  const userId = <span class="cstat-no" title="statement not covered" >req.userId</span>
+    const userId = <span class="cstat-no" title="statement not covered" >req.userId</span>
+    
+<span class="cstat-no" title="statement not covered" >    try {</span>
   
-<span class="cstat-no" title="statement not covered" >  try {</span>
-&nbsp;
-    const userCredentials = <span class="cstat-no" title="statement not covered" >await credentialService.findCredential(userId);</span>
-<span class="cstat-no" title="statement not covered" >    return res.status(httpStatus.OK).send(userCredentials)</span>
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >    return res.status(httpStatus.BAD_REQUEST).send(error);</span>
-  }
-}
-&nbsp;
-&nbsp;
-export async function credentialGetById(req: AuthenticatedRequest, res: Response) {
-&nbsp;
-  const userId = req.userId
-&nbsp;
-  const id = Number(req.params.id)  
-&nbsp;
-  try {
-    const credentialById = await credentialService.findCredentialById( userId,id);
-    return res.status(httpStatus.OK).send(credentialById);
-  } catch (error) {
-      return res.status(httpStatus.UNAUTHORIZED).send(error);
+      const userCredentials = <span class="cstat-no" title="statement not covered" >await networkService.findNetwork(userId);</span>
+<span class="cstat-no" title="statement not covered" >      return res.status(httpStatus.OK).send(userCredentials)</span>
+    } catch (error) {
+<span class="cstat-no" title="statement not covered" >      return res.status(httpStatus.BAD_REQUEST).send(error);</span>
     }
   }
+  export async function networkGetById(req: AuthenticatedRequest, res: Response) {
 &nbsp;
-&nbsp;
-&nbsp;</pre></td></tr></table></pre>
+    const userId = req.userId
+  
+    const id = Number(req.params.id)  
+  
+    try {
+      const networkById = await networkService.findNetworkById( userId,id);
+      return res.status(httpStatus.OK).send(networkById);
+    } catch (error) {
+        return res.status(httpStatus.UNAUTHORIZED).send(error);
+      }
+    }
+  
+  </pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

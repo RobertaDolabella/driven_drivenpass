@@ -4,7 +4,6 @@ import httpStatus from "http-status";
 import { ObjectSchema } from "joi";
 
 export function validateBody<T>(schema: ObjectSchema<T>): ValidationMiddleware {
-  console.log("ta no validate")
   return validate(schema, "body");
 }
 

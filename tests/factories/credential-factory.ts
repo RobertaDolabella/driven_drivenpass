@@ -1,26 +1,26 @@
-import Cryptr from "cryptr";
+import cryptr from "cryptr";
 import { faker } from "@faker-js/faker";
 import { Credential } from "@prisma/client";
 import { prisma } from "@/config";
 
 export async function createCredential(params: Partial<Credential> = {}): Promise<Credential> {
 
-    const incomingPassword = params.password 
+    const incomingPassword = params.password || faker.random.alphaNumeric(10);
     const Cryptr = require('cryptr');
     const cryptr = new Cryptr(process.env.SECRET_KEY);
     const hashedPassword = cryptr.encrypt(incomingPassword)
-    return prisma.credential.create({
+    return await prisma.credential.create({
         data: {
-            title: params.title ,
-            url: params.url ,
-            username: params.username ,
+            title: params.title || faker.name.firstName() ,
+            url: params.url || faker.internet.url(),
+            username: params.username || faker.name.lastName(),
             password: hashedPassword,
-            userId: params.userId 
+            userId: params.userId || faker.datatype.number()
         }
 
     })
 
-
+}
     // const incomingPassword = params.password || faker.random.alphaNumeric(10);
     // const hashedPassword = await bcrypt.hash(incomingPassword, 12);
     // return prisma.user.create({
@@ -29,7 +29,7 @@ export async function createCredential(params: Partial<Credential> = {}): Promis
     //     password: hashedPassword,
     //   }
     // });
-}
+
 findCredentials
 
 export async function findCredentials(userId: number) {
