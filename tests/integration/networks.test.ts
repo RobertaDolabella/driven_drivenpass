@@ -14,14 +14,16 @@ import { findNetwork } from "@/services";
 
 beforeAll(async () => {
     await init();
+   
 });
 
 beforeEach(async () => {
     await cleanDb();
 });
-afterEach(async () => {
-    await cleanDb();
-});
+
+// afterEach(async () => {
+//     await cleanDb();
+// });
 
 
 const server = supertest(app);
@@ -53,7 +55,7 @@ describe("POST /network", () => {
         expect(response.status).toBe(httpStatus.BAD_REQUEST);
     });
 });
-describe("when body and token are valid", () => {
+describe("POST /network, when body and token are valid", () => {
     const generateValidBody = () => ({
         title: faker.name.lastName(),
         network: faker.animal.dog(),
@@ -73,7 +75,7 @@ describe("when body and token are valid", () => {
     it("should respond with status 201 when body is valid and send a token", async () => {
         const user = await createUser();
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
-
+console.log(user.id)
         const networkBody = generateValidBody();
 
         const response = await server.post("/network").set("Authorization", `Bearer ${token}`).send(networkBody);

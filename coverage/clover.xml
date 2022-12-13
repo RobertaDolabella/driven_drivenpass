@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1670886884343" clover="3.2.0">
-  <project timestamp="1670886884343" name="All files">
-    <metrics statements="353" coveredstatements="335" conditionals="45" coveredconditionals="25" methods="62" coveredmethods="56" elements="460" coveredelements="416" complexity="0" loc="353" ncloc="353" packages="13" files="35" classes="35"/>
+<coverage generated="1670947509138" clover="3.2.0">
+  <project timestamp="1670947509139" name="All files">
+    <metrics statements="351" coveredstatements="339" conditionals="45" coveredconditionals="26" methods="62" coveredmethods="57" elements="458" coveredelements="422" complexity="0" loc="351" ncloc="351" packages="13" files="35" classes="35"/>
     <package name="src">
       <metrics statements="15" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
       <file name="app.ts" path="/home/roberta/Área de Trabalho/projeto19-drivenpass/src/app.ts">
@@ -49,18 +49,18 @@
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="64" coveredstatements="59" conditionals="1" coveredconditionals="1" methods="8" coveredmethods="8"/>
+      <metrics statements="64" coveredstatements="61" conditionals="1" coveredconditionals="1" methods="8" coveredmethods="8"/>
       <file name="credentials-controller.ts" path="/home/roberta/Área de Trabalho/projeto19-drivenpass/src/controllers/credentials-controller.ts">
-        <metrics statements="22" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <metrics statements="22" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="1" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
         <line num="6" count="3" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
         <line num="21" count="3" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
@@ -82,17 +82,17 @@
         <line num="3" count="3" type="stmt"/>
       </file>
       <file name="networks-controller.ts" path="/home/roberta/Área de Trabalho/projeto19-drivenpass/src/controllers/networks-controller.ts">
-        <metrics statements="23" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <metrics statements="23" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="2" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
         <line num="6" count="3" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
         <line num="23" count="3" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
@@ -153,14 +153,14 @@
         <line num="3" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
         <line num="8" count="3" type="stmt"/>
-        <line num="9" count="23" type="stmt"/>
-        <line num="10" count="23" type="cond" truecount="1" falsecount="0"/>
-        <line num="12" count="17" type="stmt"/>
-        <line num="13" count="17" type="cond" truecount="0" falsecount="1"/>
-        <line num="15" count="17" type="stmt"/>
-        <line num="16" count="17" type="stmt"/>
-        <line num="18" count="11" type="stmt"/>
-        <line num="20" count="11" type="stmt"/>
+        <line num="9" count="25" type="stmt"/>
+        <line num="10" count="25" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="19" type="stmt"/>
+        <line num="13" count="19" type="cond" truecount="0" falsecount="1"/>
+        <line num="15" count="19" type="stmt"/>
+        <line num="16" count="19" type="stmt"/>
+        <line num="18" count="13" type="stmt"/>
+        <line num="20" count="13" type="stmt"/>
         <line num="22" count="6" type="stmt"/>
         <line num="27" count="12" type="stmt"/>
       </file>
@@ -178,9 +178,9 @@
         <line num="10" count="3" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
         <line num="15" count="12" type="stmt"/>
-        <line num="16" count="13" type="stmt"/>
-        <line num="20" count="13" type="cond" truecount="2" falsecount="0"/>
-        <line num="21" count="7" type="stmt"/>
+        <line num="16" count="15" type="stmt"/>
+        <line num="20" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="9" type="stmt"/>
         <line num="23" count="19" type="stmt"/>
       </file>
     </package>
@@ -189,9 +189,9 @@
       <file name="index.ts" path="/home/roberta/Área de Trabalho/projeto19-drivenpass/src/repositories/creedential-repository/index.ts">
         <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
         <line num="1" count="3" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
         <line num="41" count="1" type="stmt"/>
@@ -206,9 +206,9 @@
       <file name="index.ts" path="/home/roberta/Área de Trabalho/projeto19-drivenpass/src/repositories/network-repository/index.ts">
         <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
         <line num="1" count="3" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
         <line num="33" count="3" type="stmt"/>
         <line num="39" count="3" type="stmt"/>
         <line num="45" count="3" type="stmt"/>
@@ -239,7 +239,7 @@
         <line num="4" count="3" type="stmt"/>
         <line num="6" count="3" type="stmt"/>
         <line num="8" count="3" type="stmt"/>
-        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
       </file>
       <file name="index.ts" path="/home/roberta/Área de Trabalho/projeto19-drivenpass/src/routers/index.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -294,16 +294,16 @@
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="123" coveredstatements="117" conditionals="9" coveredconditionals="6" methods="22" coveredmethods="21"/>
+      <metrics statements="121" coveredstatements="119" conditionals="9" coveredconditionals="7" methods="22" coveredmethods="22"/>
       <file name="credentials-service.ts" path="/home/roberta/Área de Trabalho/projeto19-drivenpass/src/services/credentials-service.ts">
-        <metrics statements="39" coveredstatements="35" conditionals="3" coveredconditionals="1" methods="6" coveredmethods="6"/>
+        <metrics statements="37" coveredstatements="36" conditionals="3" coveredconditionals="2" methods="6" coveredmethods="6"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="7" count="3" type="stmt"/>
         <line num="10" count="3" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="14" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="16" count="0" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
@@ -313,38 +313,36 @@
         <line num="32" count="1" type="stmt"/>
         <line num="34" count="3" type="stmt"/>
         <line num="36" count="2" type="stmt"/>
-        <line num="38" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="41" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
+        <line num="38" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="41" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
         <line num="57" count="1" type="stmt"/>
-        <line num="59" count="1" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
         <line num="65" count="1" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
-        <line num="71" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
         <line num="77" count="1" type="stmt"/>
-        <line num="78" count="1" type="stmt"/>
         <line num="79" count="1" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
-        <line num="86" count="3" type="stmt"/>
-        <line num="92" count="3" type="stmt"/>
-        <line num="93" count="3" type="stmt"/>
+        <line num="84" count="3" type="stmt"/>
+        <line num="90" count="3" type="stmt"/>
+        <line num="91" count="3" type="stmt"/>
       </file>
       <file name="errors.ts" path="/home/roberta/Área de Trabalho/projeto19-drivenpass/src/services/errors.ts">
-        <metrics statements="8" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
         <line num="3" count="3" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="10" count="3" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
         <line num="17" count="3" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
         <line num="24" count="3" type="stmt"/>
         <line num="25" count="3" type="stmt"/>
       </file>
@@ -361,17 +359,17 @@
         <line num="2" count="3" type="stmt"/>
         <line num="6" count="3" type="stmt"/>
         <line num="9" count="3" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="cond" truecount="0" falsecount="1"/>
         <line num="14" count="0" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
         <line num="31" count="3" type="stmt"/>
         <line num="33" count="3" type="stmt"/>
         <line num="35" count="3" type="stmt"/>
@@ -442,9 +440,9 @@
         <line num="3" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
         <line num="6" count="3" type="stmt"/>
-        <line num="7" count="48" type="stmt"/>
-        <line num="8" count="48" type="stmt"/>
-        <line num="9" count="48" type="stmt"/>
+        <line num="7" count="35" type="stmt"/>
+        <line num="8" count="35" type="stmt"/>
+        <line num="9" count="35" type="stmt"/>
         <line num="12" count="3" type="stmt"/>
         <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="14" count="0" type="stmt"/>

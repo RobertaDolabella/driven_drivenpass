@@ -9,7 +9,7 @@ const networksRouter = Router();
 networksRouter
 .all("/*", authenticateToken)
 .post("/", validateBody(createNetworkSchema), networkPost)
-.get("/", networkGet)
-.get("/:id", networkGetById);
+.get("/:id", networkGetById)
+.get("/", networkGet);
 
 export { networksRouter };

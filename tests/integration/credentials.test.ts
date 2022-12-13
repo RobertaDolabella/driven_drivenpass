@@ -53,7 +53,6 @@ describe("POST /credential", () => {
 
     expect(response.status).toBe(httpStatus.BAD_REQUEST);
   });
-});
   describe("when body and token are valid",() => {
     const generateValidBody = () => ({
         title: faker.name.lastName(),
@@ -85,6 +84,7 @@ it("should respond with status 201 when body is valid and send a token", async (
     expect(isCredentialCreated[0].username).toBe(credentialBody.username)
   });
 })
+});
 
 describe("GET /credential", () => {
   it("should respond with status 401 if no token is given", async () => {

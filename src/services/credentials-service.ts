@@ -39,8 +39,6 @@ export async function findCredentialById(userId: number, id:number) {
         throw invalidIdError()
     }
     if(userId!==idCredentials.userId){
-        console.log("o userId não é igual ao id user")
-        console.log(userId, idCredentials.id)
         throw invalidIdError()
     }
 
@@ -54,7 +52,7 @@ export async function findCredentialById(userId: number, id:number) {
 async function criptPassword(password: string) {
 
     const Cryptr = require('cryptr');
-    const cryptr = new Cryptr(process.env.SECRET_KEY);
+    const cryptr = await new Cryptr(process.env.SECRET_KEY);
 
     return await cryptr.encrypt(password)
 
@@ -62,10 +60,10 @@ async function criptPassword(password: string) {
 async function decryptHashPasswords(usersCredentials: Credential[]) {
 
     const Cryptr = require('cryptr');
-    const cryptr = new Cryptr(process.env.SECRET_KEY);
+    const cryptr = await new Cryptr(process.env.SECRET_KEY);
 
     for(let i =0; i<usersCredentials.length; i++){
-        usersCredentials[i].password = cryptr.decrypt(usersCredentials[i].password)
+        usersCredentials[i].password = await cryptr.decrypt(usersCredentials[i].password)
     }
 
     return usersCredentials
@@ -75,8 +73,8 @@ async function decryptHashPasswords(usersCredentials: Credential[]) {
 async function decryptHashPassword(usersCredential: Credential) {
 
     const Cryptr = require('cryptr');
-    const cryptr = new Cryptr(process.env.SECRET_KEY);
-    usersCredential.password = cryptr.decrypt(usersCredential.password)
+    const cryptr = await  new Cryptr(process.env.SECRET_KEY);
+    usersCredential.password = await cryptr.decrypt(usersCredential.password)
 
     return usersCredential
 

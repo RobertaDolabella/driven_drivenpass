@@ -8,7 +8,8 @@ const credentialsRouter = Router();
 credentialsRouter
     .all("/*", authenticateToken)
     .post("/", validateBody(createCredentialSchema), credentialPost)
-    .get("/", credentialGet)
-    .get("/:id", credentialGetById);
+    .get("/:id", credentialGetById)
+    .get("/", credentialGet);
+ 
 
 export { credentialsRouter };
