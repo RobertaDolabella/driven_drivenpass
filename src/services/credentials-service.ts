@@ -25,27 +25,25 @@ export async function createCredential(userId: number, title: string, username: 
 
 export async function findCredential(userId: number) {
 
-    const usersCredentials = await credentialRepository.findCredentailByUser(userId)
+    const usersCredentials = await credentialRepository.findCredentailByUser(userId);
 
-   const userCredentialsPasswordDecript =  await decryptHashPasswords(usersCredentials)
+   const userCredentialsPasswordDecript =  await decryptHashPasswords(usersCredentials);
 
     return userCredentialsPasswordDecript
 }
 export async function findCredentialById(userId: number, id:number) {
 
-    const idCredentials = await credentialRepository.findCredentailById(id)
-
+    const idCredentials = await credentialRepository.findCredentailById(id);
     if(!idCredentials){
         throw invalidIdError()
-    }
+    };
+
     if(userId!==idCredentials.userId){
         throw invalidIdError()
-    }
+    };
 
-   const idCredentialPasswordDecript =  decryptHashPassword(idCredentials)
-
+   const idCredentialPasswordDecript =  decryptHashPassword(idCredentials);
     return idCredentialPasswordDecript
-
 }
 
 
@@ -74,9 +72,26 @@ async function decryptHashPassword(usersCredential: Credential) {
 
     const Cryptr = require('cryptr');
     const cryptr = await  new Cryptr(process.env.SECRET_KEY);
-    usersCredential.password = await cryptr.decrypt(usersCredential.password)
+    usersCredential.password = await cryptr.decrypt(usersCredential.password);
 
     return usersCredential
+
+}
+
+export async function findCredentialByIdAndDelete(userId: number, id:number) {
+
+    const idNetwork = await credentialRepository.findCredentailById(id);
+
+    if(!idNetwork){
+        throw invalidIdError()
+    };
+    if(userId!==idNetwork.userId){
+        throw invalidIdError()
+    };
+
+   await credentialRepository.deleteCredential(id);
+
+    return  {message:"Credential deleted"}
 
 }
 export type CreateCredentialParams = Omit<Credential, "id" & "userId">;
@@ -84,7 +99,8 @@ export type CreateCredentialParams = Omit<Credential, "id" & "userId">;
 const credentialService = {
     createCredential,
     findCredential,
-    findCredentialById
+    findCredentialById,
+    findCredentialByIdAndDelete
 };
 
 export * from "./errors";

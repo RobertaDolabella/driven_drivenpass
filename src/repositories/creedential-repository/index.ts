@@ -52,12 +52,23 @@ return
     return userCredentials
   
   }
+  
+  async function deleteCredential(id:number) {
+ 
+    await prisma.credential.delete({
+        where:{
+            id
+        }
+    })
+    return
 
+}
 const credentialRepository = {
     findCredentailByUserAndTitle,
     createCrendentialValid,
     findCredentailByUser,
-    findCredentailById
+    findCredentailById, 
+    deleteCredential
 
 };
 

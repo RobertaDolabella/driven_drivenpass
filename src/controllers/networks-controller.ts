@@ -8,7 +8,6 @@ export async function networkPost(req: AuthenticatedRequest, res: Response) {
   const { title, network, password} = req.body;
 
   const userId = req.userId
-  console.log(userId)
   
   try {
 
@@ -27,7 +26,7 @@ export async function networkGet(req: AuthenticatedRequest, res: Response) {
     try {
   
       const userCredentials = await networkService.findNetwork(userId);
-      return res.status(httpStatus.OK).send(userCredentials)
+      return res.status(httpStatus.OK).send(userCredentials);
     } catch (error) {
       return res.status(httpStatus.BAD_REQUEST).send(error);
     }
@@ -36,7 +35,7 @@ export async function networkGet(req: AuthenticatedRequest, res: Response) {
 
     const userId = req.userId
   
-    const id = Number(req.params.id)  
+    const id = Number(req.params.id);
   
     try {
       const networkById = await networkService.findNetworkById( userId,id);
@@ -46,4 +45,19 @@ export async function networkGet(req: AuthenticatedRequest, res: Response) {
       }
     }
   
+
+  export async function networkDelete(req: AuthenticatedRequest, res: Response) {
+
+    const userId = req.userId
   
+    const id = Number(req.params.id);
+  
+    try {
+      const networkMessage = await networkService.findNetworkByIdAndDelete( userId,id);
+
+      return res.send(networkMessage).status(httpStatus.OK);
+    } catch (error) {
+        return res.status(httpStatus.UNAUTHORIZED).send(error);
+      }
+    }
+    

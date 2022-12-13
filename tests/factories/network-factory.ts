@@ -30,6 +30,8 @@ export async function createNetwork(params: Partial<Network> = {}): Promise<Netw
     // });
 }
 
-export async function findNetworks(userId: number) {
+export async function findNetwork(userId: number) {
     return prisma.network.findMany()
 }
+
+

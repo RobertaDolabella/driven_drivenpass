@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { networkPost, networkGet, networkGetById} from "../controllers"
+import { networkPost, networkGet, networkGetById, networkDelete} from "../controllers"
 import {createNetworkSchema, createUserSchema} from "@/schemas";
 import { validateBody, authenticateToken } from "@/middlewares";
 import { } from "@/controllers";
@@ -10,6 +10,7 @@ networksRouter
 .all("/*", authenticateToken)
 .post("/", validateBody(createNetworkSchema), networkPost)
 .get("/:id", networkGetById)
-.get("/", networkGet);
+.get("/", networkGet)
+.delete("/:id", networkDelete);
 
 export { networksRouter };

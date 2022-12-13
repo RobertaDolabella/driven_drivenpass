@@ -52,11 +52,22 @@ async function findNetworkByUser(userId: number) {
   
   }
 
+async function deleteNetwork(id:number) {
+ 
+    await prisma.network.delete({
+        where:{
+            id
+        }
+    })
+    return
+
+}
 const networkRepository = {
     findNetworkByUserAndTitle,
     createNetworkValid,
     findNetworkByUser,
-    findNetworkById
+    findNetworkById,
+    deleteNetwork
 
 };
 export default networkRepository;

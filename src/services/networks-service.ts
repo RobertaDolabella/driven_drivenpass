@@ -45,8 +45,7 @@ export async function findNetworkById(userId: number, id:number) {
         throw invalidIdError()
     }
     if(userId!==idNetwork.userId){
-        console.log("o userId não é igual ao id user")
-        console.log(userId, idNetwork.id)
+        
         throw invalidIdError()
     }
 
@@ -78,12 +77,31 @@ async function decryptHashPassword(usersNetwork: Network) {
 
 }
 
+export async function findNetworkByIdAndDelete(userId: number, id:number) {
+
+    const idNetwork = await networkRepository.findNetworkById(id)
+
+    if(!idNetwork){
+        throw invalidIdError()
+    }
+    if(userId!==idNetwork.userId){
+        throw invalidIdError()
+    }
+
+   await networkRepository.deleteNetwork(id)
+
+    return  {message:"Network deleted"}
+
+}
+
+
 export type CreateNetworkParams = Omit<Network, "id" & "userId">;
 
 const networkService = {
     createNetwork,
     findNetwork,
-    findNetworkById
+    findNetworkById,
+    findNetworkByIdAndDelete
  
 };
 

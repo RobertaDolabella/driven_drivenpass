@@ -14,16 +14,10 @@ import { string } from "joi";
 beforeAll(async () => {
   await init();
 });
-// beforeAll(async () => {
-//   await cleanDb();
-// });
+
 beforeEach(async () => {
   await cleanDb();
 });
-
-// afterEach(async () => {
-//   await cleanDb();
-// });
 
 const server = supertest(app);
 
@@ -120,6 +114,7 @@ describe("GET /credential", () => {
     expect(response.body).toBeDefined()
   });
 })
+
 describe("GET /credential/:id", () => {
   it("should respond with status 401 if no token is given", async () => {
     const user = await createUser();
@@ -192,5 +187,82 @@ describe("GET /credential/:id", () => {
 
     expect(response.status).toBe(httpStatus.OK);
     expect(response.body).toBeDefined()
+  });
+})
+
+describe("DELETE /credential/:id", () => {
+  it("should respond with status 401 if no token is given", async () => {
+      const user = await createUser();
+      const response = await server.delete(`/credential/${user.id}`);
+
+      expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+  });
+
+  it("should respond with status 401 if given token is not valid", async () => {
+      const token = faker.lorem.word();
+      const user = await createUser();
+      const response = await server.delete(`/credential/${user.id}`).set("Authorization", `Bearer ${token}`);
+
+      expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+  });
+  it("should respond with status 401 if token is valid but the id doesn't exist", async () => {
+
+      const user = await createUser();
+
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+
+      const credentialPreDefined = await createCredential({
+        title: faker.name.lastName(),
+        url: faker.internet.url(),
+        username: faker.name.firstName(),
+        password: faker.random.alphaNumeric(10),
+        userId: user.id
+      })
+
+      const response = await server.delete(`/credential/2`).set("Authorization", `Bearer ${token}`);
+
+      expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+  });
+  it("should respond with status 401 if token is valid but it doesn't match with the id", async () => {
+
+      const user = await createUser();
+      const anotherUser = await createUser();
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+
+      const credentiallInfo = {
+          title: faker.name.lastName(),
+          credential: faker.name.firstName(),
+          password: faker.random.alphaNumeric(10),
+          userId: anotherUser.id
+      }
+
+      const credentialPreDefined = await createCredential(credentiallInfo)
+      // const findeCredentialId = await findCredentials(anotherUser.id)
+
+
+      const response = await server.delete(`/credential/${credentialPreDefined.id}`).set("Authorization", `Bearer ${token}`);
+
+      expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+  });
+  it("should respond with status 200 when a valid token is sent and id is correct", async () => {
+      const user = await createUser();
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+      const credentiallInfo = {
+          title: faker.name.lastName(),
+          credential: faker.animal.dog(),
+          password: faker.random.alphaNumeric(10),
+          userId: user.id
+      }
+      const credentialPreDefined = await createCredential(credentiallInfo)
+      const credentialFoundBefore = await findCredentials(user.id)
+console.log(credentialFoundBefore)
+
+      const response = await server.delete(`/credential/${credentialPreDefined.id}`).set("Authorization", `Bearer ${token}`);
+
+      const credentialFoundAfter = await findCredentials(user.id)
+      console.log(credentialFoundAfter)
+console.log("response", response.body)
+      expect(response.status).toBe(httpStatus.OK);
+      expect(response.body).toEqual({message:"Credential deleted"})
   });
 })

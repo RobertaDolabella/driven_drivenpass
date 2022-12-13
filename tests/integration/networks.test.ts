@@ -6,10 +6,7 @@ import httpStatus from "http-status";
 import * as jwt from "jsonwebtoken";
 import supertest from "supertest";
 import { cleanDb } from "../helpers";
-import { createUser, createNetwork } from "../factories"
-import { title } from "process";
-import { string } from "joi";
-import { findNetwork } from "@/services";
+import { createUser, createNetwork, findNetwork } from "../factories"
 
 
 beforeAll(async () => {
@@ -20,10 +17,6 @@ beforeAll(async () => {
 beforeEach(async () => {
     await cleanDb();
 });
-
-// afterEach(async () => {
-//     await cleanDb();
-// });
 
 
 const server = supertest(app);
@@ -182,11 +175,86 @@ describe("GET /network/:id", () => {
             password: faker.random.alphaNumeric(10),
             userId: user.id
         }
-        const credentialPreDefined = await createNetwork(networklInfo)
+        const networkPreDefined = await createNetwork(networklInfo)
 
-        const response = await server.get(`/network/${credentialPreDefined.id}`).set("Authorization", `Bearer ${token}`);
+        const response = await server.get(`/network/${networkPreDefined.id}`).set("Authorization", `Bearer ${token}`);
 
         expect(response.status).toBe(httpStatus.OK);
         expect(response.body).toBeDefined()
+    });
+})
+describe("DELETE /network/:id", () => {
+    it("should respond with status 401 if no token is given", async () => {
+        const user = await createUser();
+        const response = await server.delete(`/network/${user.id}`);
+
+        expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+    });
+
+    it("should respond with status 401 if given token is not valid", async () => {
+        const token = faker.lorem.word();
+        const user = await createUser();
+        const response = await server.delete(`/network/${user.id}`).set("Authorization", `Bearer ${token}`);
+
+        expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+    });
+    it("should respond with status 401 if token is valid but the id doesn't exist", async () => {
+
+        const user = await createUser();
+
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+
+        const networkPreDefined = await createNetwork({
+            title: faker.name.lastName(),
+            network: faker.animal.dog(),
+            password: faker.random.alphaNumeric(10),
+            userId: user.id
+        })
+
+        const response = await server.delete(`/network/2`).set("Authorization", `Bearer ${token}`);
+
+        expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+    });
+    it("should respond with status 401 if token is valid but it doesn't match with the id", async () => {
+
+        const user = await createUser();
+        const anotherUser = await createUser();
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+
+        const networklInfo = {
+            title: faker.name.lastName(),
+            network: faker.name.firstName(),
+            password: faker.random.alphaNumeric(10),
+            userId: anotherUser.id
+        }
+
+        const credentialPreDefined = await createNetwork(networklInfo)
+        // const findeCredentialId = await findCredentials(anotherUser.id)
+
+
+        const response = await server.delete(`/network/${credentialPreDefined.id}`).set("Authorization", `Bearer ${token}`);
+
+        expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+    });
+    it("should respond with status 200 when a valid token is sent and id is correct", async () => {
+        const user = await createUser();
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+        const networklInfo = {
+            title: faker.name.lastName(),
+            network: faker.animal.dog(),
+            password: faker.random.alphaNumeric(10),
+            userId: user.id
+        }
+        const credentialPreDefined = await createNetwork(networklInfo)
+        const networkFoundBefore = await findNetwork(user.id)
+console.log(networkFoundBefore)
+
+        const response = await server.delete(`/network/${credentialPreDefined.id}`).set("Authorization", `Bearer ${token}`);
+
+        const networkFoundAfter = await findNetwork(user.id)
+        console.log(networkFoundAfter)
+console.log("response", response.body)
+        expect(response.status).toBe(httpStatus.OK);
+        expect(response.body).toEqual({message:"Network deleted"})
     });
 })

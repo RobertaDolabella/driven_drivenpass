@@ -25,7 +25,7 @@ export async function credentialGet(req: AuthenticatedRequest, res: Response) {
   try {
 
     const userCredentials = await credentialService.findCredential(userId);
-    return res.status(httpStatus.OK).send(userCredentials)
+    return res.status(httpStatus.OK).send(userCredentials);
   } catch (error) {
     return res.status(httpStatus.BAD_REQUEST).send(error);
   }
@@ -36,7 +36,7 @@ export async function credentialGetById(req: AuthenticatedRequest, res: Response
 
   const userId = req.userId
 
-  const id = Number(req.params.id)  
+  const id = Number(req.params.id);
 
   try {
     const credentialById = await credentialService.findCredentialById( userId,id);
@@ -46,4 +46,18 @@ export async function credentialGetById(req: AuthenticatedRequest, res: Response
     }
   }
 
+  export async function credentialDelete(req: AuthenticatedRequest, res: Response) {
+
+    const userId = req.userId;
+  
+    const id = Number(req.params.id);
+  
+    try {
+      const credentialMessage = await credentialService.findCredentialByIdAndDelete( userId,id);
+      return res.send(credentialMessage).status(httpStatus.OK);
+    } catch (error) {
+        return res.status(httpStatus.UNAUTHORIZED).send(error);
+      }
+    }
+    
 
