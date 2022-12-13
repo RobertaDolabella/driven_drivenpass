@@ -114,6 +114,7 @@ describe("GET /credential", () => {
     const response = await server.get("/credential").set("Authorization", `Bearer ${token}`);
 
     const isCredentialCreated = await findCredentials(user.id)
+    console.log(response.body)
 
     expect(response.status).toBe(httpStatus.OK);
     expect(response.body).toBeDefined()
@@ -184,6 +185,7 @@ describe("GET /credential/:id", () => {
       password: faker.random.alphaNumeric(10),
       userId: user.id
     }
+
     const credentialPreDefined = await createCredential(credentialInfo)
   
     const response = await server.get(`/credential/${credentialPreDefined.id}`).set("Authorization", `Bearer ${token}`);
